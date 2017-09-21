@@ -1,0 +1,95 @@
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ * See the bottom of this file for the license terms.
+ */
+
+/*
+   This sketch example demonstrates how the BMI160 on the
+   Intel(R) Curie(TM) module can be used to read accelerometer data
+*/
+
+#include "CurieIMU.h"
+
+const int temperaturePin = A0;
+
+void setup() {
+  Serial.begin(9600); // initialize Serial communication
+  while (!Serial);    // wait for the serial port to open
+
+  // initialize device
+  Serial.println("Initializing IMU device...");
+  CurieIMU.begin();
+}
+
+void loop() {
+float tempArduino, tempArduinoC, tempArduinoF;
+float voltage, tempSensorC, tempSensorF;
+
+tempArduino = CurieIMU.readTemperature();
+tempArduinoC = (tempArduino / 512.0) + 23.0;
+tempArduinoF = tempArduinoC * (9.0 / 5.0) + 32.0;
+
+voltage = getVoltage(temperaturePin);
+
+tempSensorC = (voltage - 0.5) * 100.0;
+tempSensorF = tempSensorC * (9.0 / 5.0) + 32.0;
+
+Serial.print("Arduino says the temperature is ");
+Serial.print(tempArduinoC);
+Serial.print(" deg C, or ");
+Serial.print(tempArduinoF);
+Serial.print(" deg F.");
+Serial.println();
+Serial.print("The external sensor reads ");
+Serial.print(voltage);
+Serial.print(" volts, which means ");
+Serial.print(tempSensorC);
+Serial.print(" deg C, or ");
+Serial.print(tempSensorF);
+Serial.print(" deg F.");
+Serial.println();
+
+  // read accelerometer measurements from device, scaled to the configured range
+//  CurieIMU.readAccelerometerScaled(ax, ay, az);
+
+  // display tab-separated accelerometer x/y/z values
+//  Serial.print("a:\t");
+//  Serial.print(ax);
+//  Serial.print("\t");
+//  Serial.print(ay);
+//  Serial.print("\t");
+//  Serial.print(az);
+//  Serial.println();
+  delay(10000);
+}
+
+float getVoltage(int pin)   //Function to read and return
+              //floating-point value (true voltage)
+              //on analog pin 
+{
+
+  return (analogRead(pin) / 1024.0 * 3.3); 
+  // This equation converts the 0 to 1023 value that analogRead()
+  // returns, into a 0.0 to 5.0 value that is the true voltage
+  // being read at that pin.
+}
+
+/*
+   Copyright (c) 2016 Intel Corporation.  All rights reserved.
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+*/
+
