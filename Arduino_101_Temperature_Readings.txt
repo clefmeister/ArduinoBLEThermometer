@@ -3,10 +3,6 @@
  * See the bottom of this file for the license terms.
  */
 
-/*
-   This sketch example demonstrates how the BMI160 on the
-   Intel(R) Curie(TM) module can be used to read accelerometer data
-*/
 
 #include "CurieIMU.h"
 
