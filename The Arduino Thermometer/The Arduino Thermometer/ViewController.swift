@@ -42,7 +42,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     let weatherSensorsName = "ArduinoThermometer"
     
     lazy var weatherData: NSData = NSData()
-    let urlPath: String = "http://api.wunderground.com/api/6adb8715c3abc005/conditions/q/OH/Canfield.json"
+    let urlPath: String = "http://api.wunderground.com/api/<Your API Key Here>/conditions/q/<Your Location Path Here>.json"
     
     override func viewDidLoad() {
         super.viewDidLoad()
