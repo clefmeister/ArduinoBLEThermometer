@@ -1,9 +1,10 @@
 # ArduinoBLEThermometer
 ##Important Note:
 The original version of this repository utilized the TMP36 temperature sensor, but the current version uses the DHT22 temperature and humidity sensor.
+
 Creating the Arduino BLE Thermometer based on this repository will require the following hardware:
 * An Arduino/Genuino 101 microcontroller board
-* A TMP36 temperature sensor module
+* A DHT22 temperature and humidity sensor module
 * A breadboard
 * Three (3) wires
 
